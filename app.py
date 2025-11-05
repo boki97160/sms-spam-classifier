@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import string
 import nltk
+import os # Import os module
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from wordcloud import WordCloud
@@ -13,16 +14,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import joblib
 
-# --- NLTK Data Download ---
-def download_nltk_data():
-    resources = ["stopwords", "punkt", "wordnet"]
-    for resource in resources:
-        try:
-            nltk.data.find(f"corpora/{resource}" if resource != "punkt" else f"tokenizers/{resource}")
-        except LookupError:
-            nltk.download(resource)
-
-download_nltk_data()
+# --- NLTK Data Path Configuration ---
+if os.path.exists('nltk_data'):
+    nltk.data.path.append('./nltk_data')
 
 
 # --- Helper Functions ---
