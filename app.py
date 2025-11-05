@@ -15,18 +15,12 @@ import joblib
 
 # --- NLTK Data Download ---
 def download_nltk_data():
-    try:
-        nltk.data.find('corpora/stopwords')
-    except LookupError:
-        nltk.download('stopwords')
-    try:
-        nltk.data.find('tokenizers/punkt')
-    except LookupError:
-        nltk.download('punkt')
-    try:
-        nltk.data.find('corpora/wordnet')
-    except LookupError:
-        nltk.download('wordnet')
+    resources = ["stopwords", "punkt", "wordnet"]
+    for resource in resources:
+        try:
+            nltk.data.find(f"corpora/{resource}" if resource != "punkt" else f"tokenizers/{resource}")
+        except LookupError:
+            nltk.download(resource)
 
 download_nltk_data()
 
