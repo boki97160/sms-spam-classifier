@@ -6,6 +6,11 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+# Download NLTK data
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
 # Load the trained model and vectorizer
 model = joblib.load('spam_classifier_model.joblib')
 vectorizer = joblib.load('tfidf_vectorizer.joblib')
