@@ -65,7 +65,7 @@ df = None
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, encoding='latin-1')
 elif use_default_dataset:
-    df = pd.read_csv('Hands-On-Artificial-Intelligence-for-Cybersecurity/Chapter03/datasets/sms_spam_no_header.csv', encoding='latin-1', header=None)
+    df = pd.read_csv('sms_spam_no_header.csv', encoding='latin-1', header=None)
     df.columns = ['label', 'message']
 
 if df is not None:
