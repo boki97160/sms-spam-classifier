@@ -104,14 +104,21 @@ if df is not None:
         sns.histplot(data=df, x='message_length', hue=label_column, multiple='stack', bins=50, ax=ax)
         st.pyplot(fig)
 
-        # --- 4. Model Training and Classification ---
-        st.header("4. Spam Classification")
+        # --- 4. Model Training ---
+        st.header("4. Model Training")
         with st.spinner("Training classification model..."):
             model, vectorizer = train_model(df, 'processed_text', label_column)
+            st.session_state['model'] = model
+            st.session_state['vectorizer'] = vectorizer
         st.success("Model trained successfully!")
 
-        message_input = st.text_area("Enter a message to classify")
-        if st.button("Classify Message"):
+    # --- 5. Spam Classification ---
+    st.header("5. Spam Classification")
+    message_input = st.text_area("Enter a message to classify")
+    if st.button("Classify Message"):
+        if 'model' in st.session_state and 'vectorizer' in st.session_state:
+            model = st.session_state['model']
+            vectorizer = st.session_state['vectorizer']
             if message_input:
                 processed_message = preprocess_text(message_input)
                 vectorized_message = vectorizer.transform([processed_message])
@@ -119,3 +126,5 @@ if df is not None:
                 st.write(f"**Prediction: {prediction.upper()}**")
             else:
                 st.write("Please enter a message.")
+        else:
+            st.write("Please run the analysis first to train the model.")
