@@ -16,7 +16,7 @@ import joblib
 
 # --- NLTK Data Path Configuration ---
 if os.path.exists('nltk_data'):
-    nltk.data.path.append('./nltk_data')
+    nltk.data.path.insert(0, './nltk_data')
 
 
 # --- Helper Functions ---
